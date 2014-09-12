@@ -1,17 +1,23 @@
+
 Router.map ->
   @route "home",
     path: "/"
+    waitOn: -> Meteor.subscribe "gameStates"
 
-Meteor.atServer ->
+if Meteor.isServer
   Gamestates = new Meteor.Collection "gameStates"
   Meteor.publish "gameStates", ->
     @added "gameStates", 1, GameState.initialBoard
 
-Meteor.atClient ->
+if Meteor.isClient
   Meteor.subscribe "gameStates"
+  Gamestates = new Meteor.Collection "gameStates"
+  @Gamestates = Gamestates
 
   Template.board.rendered = ->
+    board = Gamestates.find().count()
+    console.log("This many boards: " + board)
     console.debug("Rendering chessboard.js board")
     new ChessBoard "chessboard-js-board",
      draggable: true
-     position: 'start'
+     position: ChessBoardJSUtil.fromMatey.board()
