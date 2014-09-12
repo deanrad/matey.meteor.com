@@ -2,16 +2,23 @@
   <title>matey.meteor.com</title>
 </head>
 
-<body>
+<template name="home">
   <h1>Ahoy, Matey!</h1>
 
   Would you care for a game of Chess ?
   {{> newGame }}
-</body>
+
+  {{> board }}
+</template>
 
 <template name="newGame">
   <div id="new-game">
     <button id="init-game">Yes</button>
     <button id="wimp-out">No, I'm Afraid</button>
+  </div>
+</template>
+
+<template name="board">
+  <div id="chessboard-js-board" style="width:400px">
   </div>
 </template>
