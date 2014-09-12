@@ -21,3 +21,5 @@ class GameState
     graveyard:
       white: {}
       black: {}
+
+@GameState = GameState #export throughout our app
