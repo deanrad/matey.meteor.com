@@ -3,12 +3,15 @@
 </head>
 
 <body>
-  <h1>Welcome to Meteor!</h1>
+  <h1>Ahoy, Matey!</h1>
 
-  {{> hello}}
+  Would you care for a game of Chess ?
+  {{> newGame }}
 </body>
 
-<template name="hello">
-  <button>Click Me</button>
-  <p>You've pressed the button {{counter}} times.</p>
+<template name="newGame">
+  <div id="new-game">
+    <button id="init-game">Yes</button>
+    <button id="wimp-out">No, I'm Afraid</button>
+  </div>
 </template>
