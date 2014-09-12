@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+  <title>GameState</title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <meta name="viewport" content="width=device-width, target-densitydpi=160dpi, initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
+  <link rel="stylesheet" media="all" href="docco.css" />
+</head>
+<body>
+  <div id="container">
+    <div id="background"></div>
+    
+    <ul class="sections">
+        
+        
+        
+        <li id="section-1">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-1">&#182;</a>
+              </div>
+              <h1 id="gamestate">GameState</h1>
+<p>Inspired by <a href="en.wikipedia.org/wiki/Forsyth–Edwards_Notation">FEN</a>,
+a GameState is an object such as:</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">GameState</span></span>
+  <span class="hljs-property">@initialBoard</span> =
+    <span class="hljs-attribute">turn_to_move</span>: <span class="hljs-string">'white'</span>
+    <span class="hljs-attribute">board</span>:
+      <span class="hljs-attribute">a1</span>: {<span class="hljs-attribute">role</span>: <span class="hljs-string">'rook'</span>, <span class="hljs-attribute">side</span>: <span class="hljs-string">'white'</span>, <span class="hljs-attribute">flank</span>: <span class="hljs-string">'queen'</span>}
+      <span class="hljs-attribute">b1</span>: {<span class="hljs-attribute">role</span>: <span class="hljs-string">'knight'</span>, <span class="hljs-attribute">side</span>: <span class="hljs-string">'white'</span>, <span class="hljs-attribute">flank</span>: <span class="hljs-string">'queen'</span>}
+      <span class="hljs-attribute">c1</span>: {<span class="hljs-attribute">role</span>: <span class="hljs-string">'bishop'</span>, <span class="hljs-attribute">side</span>: <span class="hljs-string">'white'</span>, <span class="hljs-attribute">flank</span>: <span class="hljs-string">'queen'</span>}
+      <span class="hljs-attribute">d1</span>: {<span class="hljs-attribute">role</span>: <span class="hljs-string">'queen'</span>, <span class="hljs-attribute">side</span>: <span class="hljs-string">'white'</span>}
+      <span class="hljs-attribute">e1</span>: {<span class="hljs-attribute">role</span>: <span class="hljs-string">'king'</span>, <span class="hljs-attribute">side</span>: <span class="hljs-string">'white'</span>}
+      <span class="hljs-attribute">f1</span>: {<span class="hljs-attribute">role</span>: <span class="hljs-string">'bishop'</span>, <span class="hljs-attribute">side</span>: <span class="hljs-string">'white'</span>, <span class="hljs-attribute">flank</span>: <span class="hljs-string">'king'</span>}
+      <span class="hljs-attribute">g1</span>: {<span class="hljs-attribute">role</span>: <span class="hljs-string">'knight'</span>, <span class="hljs-attribute">side</span>: <span class="hljs-string">'white'</span>, <span class="hljs-attribute">flank</span>: <span class="hljs-string">'king'</span>}
+      <span class="hljs-attribute">h1</span>: {<span class="hljs-attribute">role</span>: <span class="hljs-string">'rook'</span>, <span class="hljs-attribute">side</span>: <span class="hljs-string">'white'</span>, <span class="hljs-attribute">flank</span>: <span class="hljs-string">'king'</span>}
+    <span class="hljs-attribute">graveyard</span>:
+      <span class="hljs-attribute">white</span>: {}
+      <span class="hljs-attribute">black</span>: {}</pre></div></div>
+            
+        </li>
+        
+    </ul>
+  </div>
+</body>
+</html>
