@@ -40,7 +40,4 @@ if Meteor.isClient
       game_state = _.last GameStates.find().fetch()
       if game_state
         board = game_state.board
-        console.info("Rendering chessboard.js board")
-        new ChessBoard "chessboard-js-board",
-          draggable: true
-          position: ChessBoardJSUtil.fromMatey.board(board)
+        Board.render(board)
