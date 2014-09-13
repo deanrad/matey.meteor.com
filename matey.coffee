@@ -7,20 +7,22 @@ Router.map ->
     path: "/"
     waitOn: -> Meteor.subscribe "gameStates"
 
-# Create and publish a collection of GameStates,
-# Manually publish a single one for now
+# Create and publish a collection of GameStates.
+# Add a single Gamestate representing the start of a game
 if Meteor.isServer
-  Gamestates = new Meteor.Collection "gameStates"
+  GameStates = new Meteor.Collection "gameStates"
+
+  if GameStates.find().count() is 0
+    GameStates.insert GameState.initialState
 
   Meteor.publish "gameStates", ->
-    @added "gameStates", 1, GameState.initialState
-    @ready()
+    GameStates.find()
 
-# Subscribe to the Gamestates collection
+# Subscribe to the GameStates collection
 if Meteor.isClient
   Meteor.subscribe "gameStates"
-  Gamestates = new Meteor.Collection "gameStates"
-  @Gamestates = Gamestates # make available in browser for debugging
+  GameStates = new Meteor.Collection "gameStates"
+  @GameStates = GameStates # make available in browser for debugging
 
   # Tell Meteor that whenever anything changes, rerun
   # the function which populates the ChessBoard.JS board
@@ -29,12 +31,16 @@ if Meteor.isClient
   # on the count of the # of gamestates, causing this function
   # to be rerun whenever that count changes.
   Deps.autorun (c)->
-    board_count = Gamestates.find().count()
-    if !c.firstRun and board_count > 0
+    board_count = GameStates.find().count()
+
+    unless c.firstRun
       console.debug("Reactive data change detected")
       console.debug("Board count is #{board_count}")
-      board = Gamestates.find().fetch()[board_count-1].board
-      console.info("Rendering chessboard.js board")
-      new ChessBoard "chessboard-js-board",
-        draggable: true
-        position: ChessBoardJSUtil.fromMatey.board(board)
+
+      game_state = _.last GameStates.find().fetch()
+      if game_state
+        board = game_state.board
+        console.info("Rendering chessboard.js board")
+        new ChessBoard "chessboard-js-board",
+          draggable: true
+          position: ChessBoardJSUtil.fromMatey.board(board)

@@ -85,17 +85,19 @@ game, <em>Matey</em></p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-3">&#182;</a>
               </div>
-              <p>Create and publish a collection of GameStates,
-Manually publish a single one for now</p>
+              <p>Create and publish a collection of GameStates.
+Add a single Gamestate representing the start of a game</p>
 
             </div>
             
             <div class="content"><div class='highlight'><pre><span class="hljs-keyword">if</span> Meteor.isServer
-  Gamestates = <span class="hljs-keyword">new</span> Meteor.Collection <span class="hljs-string">"gameStates"</span>
+  GameStates = <span class="hljs-keyword">new</span> Meteor.Collection <span class="hljs-string">"gameStates"</span>
+
+  <span class="hljs-keyword">if</span> GameStates.find().count() <span class="hljs-keyword">is</span> <span class="hljs-number">0</span>
+    GameStates.insert GameState.initialState
 
   Meteor.publish <span class="hljs-string">"gameStates"</span>,<span class="hljs-function"> -&gt;</span>
-    <span class="hljs-property">@added</span> <span class="hljs-string">"gameStates"</span>, <span class="hljs-number">1</span>, GameState.initialState
-    <span class="hljs-property">@ready</span>()</pre></div></div>
+    GameStates.find()</pre></div></div>
             
         </li>
         
@@ -106,14 +108,14 @@ Manually publish a single one for now</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-4">&#182;</a>
               </div>
-              <p>Subscribe to the Gamestates collection</p>
+              <p>Subscribe to the GameStates collection</p>
 
             </div>
             
             <div class="content"><div class='highlight'><pre><span class="hljs-keyword">if</span> Meteor.isClient
   Meteor.subscribe <span class="hljs-string">"gameStates"</span>
-  Gamestates = <span class="hljs-keyword">new</span> Meteor.Collection <span class="hljs-string">"gameStates"</span>
-  <span class="hljs-property">@Gamestates</span> = Gamestates <span class="hljs-comment"># make available in browser for debugging</span></pre></div></div>
+  GameStates = <span class="hljs-keyword">new</span> Meteor.Collection <span class="hljs-string">"gameStates"</span>
+  <span class="hljs-property">@GameStates</span> = GameStates <span class="hljs-comment"># make available in browser for debugging</span></pre></div></div>
             
         </li>
         
@@ -134,15 +136,19 @@ to be rerun whenever that count changes.</p>
             </div>
             
             <div class="content"><div class='highlight'><pre>  Deps.autorun <span class="hljs-function"><span class="hljs-params">(c)</span>-&gt;</span>
-    board_count = Gamestates.find().count()
-    <span class="hljs-keyword">if</span> !c.firstRun <span class="hljs-keyword">and</span> board_count &gt; <span class="hljs-number">0</span>
+    board_count = GameStates.find().count()
+
+    <span class="hljs-keyword">unless</span> c.firstRun
       <span class="hljs-built_in">console</span>.debug(<span class="hljs-string">"Reactive data change detected"</span>)
       <span class="hljs-built_in">console</span>.debug(<span class="hljs-string">"Board count is <span class="hljs-subst">#{board_count}</span>"</span>)
-      board = Gamestates.find().fetch()[board_count-<span class="hljs-number">1</span>].board
-      <span class="hljs-built_in">console</span>.info(<span class="hljs-string">"Rendering chessboard.js board"</span>)
-      <span class="hljs-keyword">new</span> ChessBoard <span class="hljs-string">"chessboard-js-board"</span>,
-        <span class="hljs-attribute">draggable</span>: <span class="hljs-literal">true</span>
-        <span class="hljs-attribute">position</span>: ChessBoardJSUtil.fromMatey.board(board)</pre></div></div>
+
+      game_state = _.last GameStates.find().fetch()
+      <span class="hljs-keyword">if</span> game_state
+        board = game_state.board
+        <span class="hljs-built_in">console</span>.info(<span class="hljs-string">"Rendering chessboard.js board"</span>)
+        <span class="hljs-keyword">new</span> ChessBoard <span class="hljs-string">"chessboard-js-board"</span>,
+          <span class="hljs-attribute">draggable</span>: <span class="hljs-literal">true</span>
+          <span class="hljs-attribute">position</span>: ChessBoardJSUtil.fromMatey.board(board)</pre></div></div>
             
         </li>
         
