@@ -9,6 +9,7 @@
 class GameState
   @initialState =
     mover: 'white'
+    lastMove: null
     board:
       a1: {role: 'rook', side: 'white', which: 'queenside'}
       b1: {role: 'knight', side: 'white', which: 'queenside'}
@@ -45,9 +46,5 @@ class GameState
       f8: {role: 'bishop', side: 'black', which: 'kingside'}
       g8: {role: 'knight', side: 'black', which: 'kingside'}
       h8: {role: 'rook', side: 'black', which: 'kingside'}
-
-    graveyard:
-      white: {}
-      black: {}
 
 @GameState = GameState #export throughout our app

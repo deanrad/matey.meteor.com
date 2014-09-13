@@ -61,6 +61,7 @@ a GameState is an object with fields:</p>
             <div class="content"><div class='highlight'><pre><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">GameState</span></span>
   <span class="hljs-property">@initialState</span> =
     <span class="hljs-attribute">mover</span>: <span class="hljs-string">'white'</span>
+    <span class="hljs-attribute">lastMove</span>: <span class="hljs-literal">null</span>
     <span class="hljs-attribute">board</span>:
       <span class="hljs-attribute">a1</span>: {<span class="hljs-attribute">role</span>: <span class="hljs-string">'rook'</span>, <span class="hljs-attribute">side</span>: <span class="hljs-string">'white'</span>, <span class="hljs-attribute">which</span>: <span class="hljs-string">'queenside'</span>}
       <span class="hljs-attribute">b1</span>: {<span class="hljs-attribute">role</span>: <span class="hljs-string">'knight'</span>, <span class="hljs-attribute">side</span>: <span class="hljs-string">'white'</span>, <span class="hljs-attribute">which</span>: <span class="hljs-string">'queenside'</span>}
@@ -97,10 +98,6 @@ a GameState is an object with fields:</p>
       <span class="hljs-attribute">f8</span>: {<span class="hljs-attribute">role</span>: <span class="hljs-string">'bishop'</span>, <span class="hljs-attribute">side</span>: <span class="hljs-string">'black'</span>, <span class="hljs-attribute">which</span>: <span class="hljs-string">'kingside'</span>}
       <span class="hljs-attribute">g8</span>: {<span class="hljs-attribute">role</span>: <span class="hljs-string">'knight'</span>, <span class="hljs-attribute">side</span>: <span class="hljs-string">'black'</span>, <span class="hljs-attribute">which</span>: <span class="hljs-string">'kingside'</span>}
       <span class="hljs-attribute">h8</span>: {<span class="hljs-attribute">role</span>: <span class="hljs-string">'rook'</span>, <span class="hljs-attribute">side</span>: <span class="hljs-string">'black'</span>, <span class="hljs-attribute">which</span>: <span class="hljs-string">'kingside'</span>}
-
-    <span class="hljs-attribute">graveyard</span>:
-      <span class="hljs-attribute">white</span>: {}
-      <span class="hljs-attribute">black</span>: {}
 
 <span class="hljs-property">@GameState</span> = GameState <span class="hljs-comment">#export throughout our app</span></pre></div></div>
             
