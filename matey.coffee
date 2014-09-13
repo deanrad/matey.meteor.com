@@ -18,6 +18,11 @@ if Meteor.isServer
   Meteor.publish "gameStates", ->
     GameStates.find()
 
+  Meteor.methods
+    reset: ->
+      GameStates.remove({})
+      GameStates.insert GameState.initialState
+
 # Subscribe to the GameStates collection
 if Meteor.isClient
   Meteor.subscribe "gameStates"
@@ -37,6 +42,11 @@ if Meteor.isClient
       console.debug("Reactive data change detected")
       console.debug("Board count is #{board_count}")
 
-      gameState = _.last GameStates.find().fetch()
+      gameState = _.last(GameStates.find().fetch())
       if gameState
         Board.render(gameState)
+
+  Template.newGame.events
+    'click #reset': ->
+      console.log "Resetting"
+      Meteor.call "reset"
