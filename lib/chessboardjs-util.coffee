@@ -1,6 +1,7 @@
 # We use ChessboardJS for its cool rendering, but
 # we need methods for getting back and forth between
-# our data model and theirs
+# our data model and theirs.
+#
 # Convert our piece structure:
 # ````
 # {role: 'rook', side: 'white', which: 'queenside'}
@@ -13,11 +14,13 @@
 ChessBoardJSUtil =
   fromMatey:
     piece: (piece) ->
-      piece.side[0] + piece.role[0].toUpperCase()
+      side = piece.side[0]
+      role = if piece.role is 'knight' then 'N' else piece.role[0].toUpperCase()
+      side+role
     board: (board) ->
-      do(newboard = {}) =>
-        for pos, piece of board
-          newboard[pos] = @piece(piece)
-        newboard
+      newboard = {}
+      for pos, piece of board
+        newboard[pos] = @piece(piece)
+      newboard
 
 @ChessBoardJSUtil = ChessBoardJSUtil

@@ -55,8 +55,8 @@
               </div>
               <p>We use ChessboardJS for its cool rendering, but
 we need methods for getting back and forth between
-our data model and theirs
-Convert our piece structure:</p>
+our data model and theirs.</p>
+<p>Convert our piece structure:</p>
 <pre><code>{<span class="hljs-attribute">role</span>: <span class="hljs-string">'rook'</span>, <span class="hljs-attribute">side</span>: <span class="hljs-string">'white'</span>, <span class="hljs-attribute">which</span>: <span class="hljs-string">'queenside'</span>}
 </code></pre><p>into theirs</p>
 <pre><code><span class="hljs-string">'wR'</span>
@@ -67,12 +67,14 @@ Convert our piece structure:</p>
             <div class="content"><div class='highlight'><pre>ChessBoardJSUtil =
   <span class="hljs-attribute">fromMatey</span>:
     <span class="hljs-attribute">piece</span>: <span class="hljs-function"><span class="hljs-params">(piece)</span> -&gt;</span>
-      piece.side[<span class="hljs-number">0</span>] + piece.role[<span class="hljs-number">0</span>].toUpperCase()
+      side = piece.side[<span class="hljs-number">0</span>]
+      role = <span class="hljs-keyword">if</span> piece.role <span class="hljs-keyword">is</span> <span class="hljs-string">'knight'</span> <span class="hljs-keyword">then</span> <span class="hljs-string">'N'</span> <span class="hljs-keyword">else</span> piece.role[<span class="hljs-number">0</span>].toUpperCase()
+      side+role
     <span class="hljs-attribute">board</span>: <span class="hljs-function"><span class="hljs-params">(board)</span> -&gt;</span>
-      <span class="hljs-keyword">do</span>(newboard = {})<span class="hljs-function"> =&gt;</span>
-        <span class="hljs-keyword">for</span> pos, piece <span class="hljs-keyword">of</span> board
-          newboard[pos] = <span class="hljs-property">@piece</span>(piece)
-        newboard
+      newboard = {}
+      <span class="hljs-keyword">for</span> pos, piece <span class="hljs-keyword">of</span> board
+        newboard[pos] = <span class="hljs-property">@piece</span>(piece)
+      newboard
 
 <span class="hljs-property">@ChessBoardJSUtil</span> = ChessBoardJSUtil</pre></div></div>
             

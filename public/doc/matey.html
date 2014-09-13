@@ -94,7 +94,7 @@ Manually publish a single one for now</p>
   Gamestates = <span class="hljs-keyword">new</span> Meteor.Collection <span class="hljs-string">"gameStates"</span>
 
   Meteor.publish <span class="hljs-string">"gameStates"</span>,<span class="hljs-function"> -&gt;</span>
-    <span class="hljs-property">@added</span> <span class="hljs-string">"gameStates"</span>, <span class="hljs-number">1</span>, GameState.initialBoard
+    <span class="hljs-property">@added</span> <span class="hljs-string">"gameStates"</span>, <span class="hljs-number">1</span>, GameState.initialState
     <span class="hljs-property">@ready</span>()</pre></div></div>
             
         </li>
@@ -113,7 +113,7 @@ Manually publish a single one for now</p>
             <div class="content"><div class='highlight'><pre><span class="hljs-keyword">if</span> Meteor.isClient
   Meteor.subscribe <span class="hljs-string">"gameStates"</span>
   Gamestates = <span class="hljs-keyword">new</span> Meteor.Collection <span class="hljs-string">"gameStates"</span>
-  <span class="hljs-property">@Gamestates</span> = Gamestates</pre></div></div>
+  <span class="hljs-property">@Gamestates</span> = Gamestates <span class="hljs-comment"># make available in browser for debugging</span></pre></div></div>
             
         </li>
         

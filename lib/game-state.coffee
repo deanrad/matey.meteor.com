@@ -7,7 +7,7 @@
 # * graveyard: any captured pieces
 # * mover: whose turn it is to move
 class GameState
-  @initialBoard =
+  @initialState =
     mover: 'white'
     board:
       a1: {role: 'rook', side: 'white', which: 'queenside'}

@@ -13,14 +13,14 @@ if Meteor.isServer
   Gamestates = new Meteor.Collection "gameStates"
 
   Meteor.publish "gameStates", ->
-    @added "gameStates", 1, GameState.initialBoard
+    @added "gameStates", 1, GameState.initialState
     @ready()
 
 # Subscribe to the Gamestates collection
 if Meteor.isClient
   Meteor.subscribe "gameStates"
   Gamestates = new Meteor.Collection "gameStates"
-  @Gamestates = Gamestates
+  @Gamestates = Gamestates # make available in browser for debugging
 
   # Tell Meteor that whenever anything changes, rerun
   # the function which populates the ChessBoard.JS board
