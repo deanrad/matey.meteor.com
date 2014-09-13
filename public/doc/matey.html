@@ -19,6 +19,11 @@
           <div id="jump_page">
             
               
+              <a class="source" href="board.html">
+                board.coffee
+              </a>
+            
+              
               <a class="source" href="chessboardjs-util.html">
                 chessboardjs-util.coffee
               </a>
@@ -142,13 +147,9 @@ to be rerun whenever that count changes.</p>
       <span class="hljs-built_in">console</span>.debug(<span class="hljs-string">"Reactive data change detected"</span>)
       <span class="hljs-built_in">console</span>.debug(<span class="hljs-string">"Board count is <span class="hljs-subst">#{board_count}</span>"</span>)
 
-      game_state = _.last GameStates.find().fetch()
-      <span class="hljs-keyword">if</span> game_state
-        board = game_state.board
-        <span class="hljs-built_in">console</span>.info(<span class="hljs-string">"Rendering chessboard.js board"</span>)
-        <span class="hljs-keyword">new</span> ChessBoard <span class="hljs-string">"chessboard-js-board"</span>,
-          <span class="hljs-attribute">draggable</span>: <span class="hljs-literal">true</span>
-          <span class="hljs-attribute">position</span>: ChessBoardJSUtil.fromMatey.board(board)</pre></div></div>
+      gameState = _.last GameStates.find().fetch()
+      <span class="hljs-keyword">if</span> gameState
+        Board.render(gameState)</pre></div></div>
             
         </li>
         

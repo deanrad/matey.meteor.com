@@ -37,7 +37,6 @@ if Meteor.isClient
       console.debug("Reactive data change detected")
       console.debug("Board count is #{board_count}")
 
-      game_state = _.last GameStates.find().fetch()
-      if game_state
-        board = game_state.board
-        Board.render(board)
+      gameState = _.last GameStates.find().fetch()
+      if gameState
+        Board.render(gameState)
