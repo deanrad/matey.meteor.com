@@ -36,11 +36,11 @@ if Meteor.isClient
   # on the count of the # of gamestates, causing this function
   # to be rerun whenever that count changes.
   Deps.autorun (c)->
-    board_count = GameStates.find().count()
+    state_count = GameStates.find().count()
 
     unless c.firstRun
       console.debug("Reactive data change detected")
-      console.debug("Board count is #{board_count}")
+      console.debug("Board count is #{state_count-1}")
 
       gameState = _.last(GameStates.find().fetch())
       if gameState
