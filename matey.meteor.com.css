@@ -1,5 +1,0 @@
-/* CSS declarations go here */
-.flair{ display: none }
-@media (min-device-width: 600px) {
-  .flair{ display: block }
-}
