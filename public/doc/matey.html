@@ -62,6 +62,23 @@ game, <em>Matey</em></p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-2">&#182;</a>
               </div>
+              <p>We view a game as a collection of Boards, each move creating a
+new board. The most recent one in this collection is the view
+we see, but we have each previous board.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="hljs-property">@Boards</span> = <span class="hljs-keyword">new</span> Meteor.Collection <span class="hljs-string">"boards"</span></pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-3">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-3">&#182;</a>
+              </div>
               <p>Set up the default route, to be rendered after our subscription is ready</p>
 
             </div>
@@ -74,11 +91,11 @@ game, <em>Matey</em></p>
         </li>
         
         
-        <li id="section-3">
+        <li id="section-4">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-3">&#182;</a>
+                <a class="pilcrow" href="#section-4">&#182;</a>
               </div>
               <p>Create and publish a collection of Boards.
 Add a single board representing the start of a game</p>
@@ -86,8 +103,6 @@ Add a single board representing the start of a game</p>
             </div>
             
             <div class="content"><div class='highlight'><pre><span class="hljs-keyword">if</span> Meteor.isServer
-  Boards = <span class="hljs-keyword">new</span> Meteor.Collection <span class="hljs-string">"boards"</span>
-
   <span class="hljs-keyword">if</span> Boards.find().count() <span class="hljs-keyword">is</span> <span class="hljs-number">0</span>
     Boards.insert Board.initialBoard
 
@@ -102,29 +117,27 @@ Add a single board representing the start of a game</p>
         </li>
         
         
-        <li id="section-4">
+        <li id="section-5">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-4">&#182;</a>
+                <a class="pilcrow" href="#section-5">&#182;</a>
               </div>
               <p>Subscribe to the Boards collection</p>
 
             </div>
             
             <div class="content"><div class='highlight'><pre><span class="hljs-keyword">if</span> Meteor.isClient
-  Meteor.subscribe <span class="hljs-string">"boards"</span>
-  Boards = <span class="hljs-keyword">new</span> Meteor.Collection <span class="hljs-string">"boards"</span>
-  <span class="hljs-property">@Boards</span> = Boards <span class="hljs-comment"># make available in browser for debugging</span></pre></div></div>
+  Meteor.subscribe <span class="hljs-string">"boards"</span></pre></div></div>
             
         </li>
         
         
-        <li id="section-5">
+        <li id="section-6">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-5">&#182;</a>
+                <a class="pilcrow" href="#section-6">&#182;</a>
               </div>
               <p>Tell Meteor that whenever anything changes, rerun
 the function which populates the ChessBoard.JS board
@@ -135,7 +148,7 @@ to be rerun whenever that count changes.</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>  Deps.autorun <span class="hljs-function"><span class="hljs-params">(c)</span>-&gt;</span>
+            <div class="content"><div class='highlight'><pre>  Tracker.autorun <span class="hljs-function"><span class="hljs-params">(c)</span>-&gt;</span>
     state_count = Boards.find().count()
 
     <span class="hljs-keyword">unless</span> c.firstRun
