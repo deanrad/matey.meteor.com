@@ -44,9 +44,9 @@ if Meteor.isClient
       console.debug("Reactive data change detected")
       console.debug("Board count is #{state_count-1}")
 
-      latest = _.last(Boards.find().fetch())
-      if latest
-        Board.render(latest)
+      @board = _.last(Boards.find().fetch())
+      if @board
+        Board.render(@board)
 
   Template.newGame.events
     'click #reset': ->

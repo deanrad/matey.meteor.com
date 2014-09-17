@@ -80,7 +80,12 @@ Attaches an event handler that says:</p>
       <span class="hljs-attribute">onDrop</span>: <span class="hljs-function"><span class="hljs-params">(source, target)</span> -&gt;</span>
         <span class="hljs-built_in">console</span>.log <span class="hljs-string">"Moving from <span class="hljs-subst">#{source}</span> to <span class="hljs-subst">#{target}</span>"</span>
         Boards.insert Board.move(board, source, target)
-      <span class="hljs-attribute">position</span>: board.pieces</pre></div></div>
+      <span class="hljs-attribute">position</span>: board.pieces
+    <span class="hljs-keyword">if</span> board.lastMove
+      <span class="hljs-keyword">do</span>($board=$<span class="hljs-function"><span class="hljs-params">(<span class="hljs-string">"#"</span>+<span class="hljs-property">@clientId</span>)</span>, <span class="hljs-title">move</span>=<span class="hljs-title">board</span>.<span class="hljs-title">lastMove</span>, <span class="hljs-title">c</span>="<span class="hljs-title">highlight</span>-<span class="hljs-title">last</span>") -&gt;</span>
+        $board.find(<span class="hljs-string">"[data-square]"</span>).removeClass(c)
+        $board.find(<span class="hljs-string">"[data-square=<span class="hljs-subst">#{move.from}</span>]"</span>).addClass(c)
+        $board.find(<span class="hljs-string">"[data-square=<span class="hljs-subst">#{move.to}</span>]"</span>).addClass(c)</pre></div></div>
             
         </li>
         
@@ -101,6 +106,7 @@ Attaches an event handler that says:</p>
     <span class="hljs-keyword">delete</span> newPieces[from]
     newPieces[to] = mover
     {
+      <span class="hljs-attribute">lastMove</span>: {<span class="hljs-attribute">from</span>: from, <span class="hljs-attribute">to</span>: to}
       <span class="hljs-attribute">pieces</span>: newPieces
     }</pre></div></div>
             

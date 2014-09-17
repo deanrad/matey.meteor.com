@@ -155,9 +155,9 @@ to be rerun whenever that count changes.</p>
       <span class="hljs-built_in">console</span>.debug(<span class="hljs-string">"Reactive data change detected"</span>)
       <span class="hljs-built_in">console</span>.debug(<span class="hljs-string">"Board count is <span class="hljs-subst">#{state_count-<span class="hljs-number">1</span>}</span>"</span>)
 
-      latest = _.last(Boards.find().fetch())
-      <span class="hljs-keyword">if</span> latest
-        Board.render(latest)
+      <span class="hljs-property">@board</span> = _.last(Boards.find().fetch())
+      <span class="hljs-keyword">if</span> <span class="hljs-property">@board</span>
+        Board.render(<span class="hljs-property">@board</span>)
 
   Template.newGame.events
     <span class="hljs-string">'click #reset'</span>:<span class="hljs-function"> -&gt;</span>

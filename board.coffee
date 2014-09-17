@@ -19,6 +19,11 @@
         console.log "Moving from #{source} to #{target}"
         Boards.insert Board.move(board, source, target)
       position: board.pieces
+    if board.lastMove
+      do($board=$("#"+@clientId), move=board.lastMove, c="highlight-last") ->
+        $board.find("[data-square]").removeClass(c)
+        $board.find("[data-square=#{move.from}]").addClass(c)
+        $board.find("[data-square=#{move.to}]").addClass(c)
 
   # Takes a Board, returns a new one on which the move has been played.
   move: (board, from, to) ->
@@ -27,5 +32,6 @@
     delete newPieces[from]
     newPieces[to] = mover
     {
+      lastMove: {from: from, to: to}
       pieces: newPieces
     }
