@@ -4,5 +4,6 @@
 # but you can also edit it by hand.
 
 meteor-platform
+insecure # allow updates from client
 coffeescript
 iron:router
