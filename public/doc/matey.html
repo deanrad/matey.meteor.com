@@ -141,24 +141,16 @@ Add a single board representing the start of a game</p>
               </div>
               <p>Tell Meteor that whenever anything changes, rerun
 the function which populates the ChessBoard.JS board
-with the most recent one in our subscription.
-Critically, the first line establishes a dependency
-on the count of the # of boards, causing this function
-to be rerun whenever that count changes.</p>
+with the most recent one in our subscription.</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>  Tracker.autorun <span class="hljs-function"><span class="hljs-params">(c)</span>-&gt;</span>
-    state_count = Boards.find().count()
-
-    <span class="hljs-keyword">unless</span> c.firstRun
-      <span class="hljs-built_in">console</span>.debug(<span class="hljs-string">"Reactive data change detected"</span>)
-      <span class="hljs-built_in">console</span>.debug(<span class="hljs-string">"Board count is <span class="hljs-subst">#{state_count-<span class="hljs-number">1</span>}</span>"</span>)
-
-      <span class="hljs-property">@board</span> = _.last(Boards.find().fetch())
-      <span class="hljs-keyword">if</span> <span class="hljs-property">@board</span>
-        Board.render(<span class="hljs-property">@board</span>)
-
+            <div class="content"><div class='highlight'><pre>  Boards.find().observeChanges
+    <span class="hljs-attribute">added</span>:<span class="hljs-function"> -&gt;</span>
+      <span class="hljs-built_in">console</span>.log(<span class="hljs-string">"reacting to new move"</span>)
+      board = _.last(Boards.find().fetch())
+      Board.render(board) <span class="hljs-keyword">if</span> board
+      
   Template.newGame.events
     <span class="hljs-string">'click #reset'</span>:<span class="hljs-function"> -&gt;</span>
       <span class="hljs-built_in">console</span>.log <span class="hljs-string">"Resetting"</span>

@@ -34,20 +34,12 @@ if Meteor.isClient
   # Tell Meteor that whenever anything changes, rerun
   # the function which populates the ChessBoard.JS board
   # with the most recent one in our subscription.
-  # Critically, the first line establishes a dependency
-  # on the count of the # of boards, causing this function
-  # to be rerun whenever that count changes.
-  Tracker.autorun (c)->
-    state_count = Boards.find().count()
-
-    unless c.firstRun
-      console.debug("Reactive data change detected")
-      console.debug("Board count is #{state_count-1}")
-
-      @board = _.last(Boards.find().fetch())
-      if @board
-        Board.render(@board)
-
+  Boards.find().observeChanges
+    added: ->
+      console.log("reacting to new move")
+      board = _.last(Boards.find().fetch())
+      Board.render(board) if board
+      
   Template.newGame.events
     'click #reset': ->
       console.log "Resetting"
