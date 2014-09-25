@@ -13,6 +13,7 @@
   #> Add a Board which takes into account the move that was made.
   render: (board) ->
     console.info("Rendering board")
+    return unless $("#"+@clientId).length
     new ChessBoard @clientId,
       draggable: true
       onDrop: (source, target) ->
