@@ -17,6 +17,7 @@
     new ChessBoard @clientId,
       draggable: true
       onDrop: (source, target) ->
+        return if target is "offboard"
         console.log "Moving from #{source} to #{target}"
         Boards.insert Board.move(board, source, target)
       position: board.pieces
