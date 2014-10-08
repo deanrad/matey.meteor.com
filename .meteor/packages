@@ -7,3 +7,5 @@ meteor-platform
 insecure # allow updates from client
 coffeescript
 iron:router
+meteorhacks:kadira
+
